@@ -1,16 +1,30 @@
 import * as React from 'react';
+
+import MuiLink from '@mui/material/Link';
+import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
-import NextLink from 'next/link';
-import MuiLink from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
+import { useRouter } from 'next/router';
 
 // Add support for the sx prop for consistency with the other branches.
 const Anchor = styled('a')({});
 
-export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props, ref) {
-  const { to, linkAs, href, replace, scroll, shallow, prefetch, locale, ...other } = props;
+export const NextLinkComposed = React.forwardRef(function NextLinkComposed(
+  props,
+  ref
+) {
+  const {
+    to,
+    linkAs,
+    href,
+    replace,
+    scroll,
+    shallow,
+    prefetch,
+    locale,
+    ...other
+  } = props;
 
   return (
     <NextLink
@@ -60,7 +74,8 @@ const Link = React.forwardRef(function Link(props, ref) {
   });
 
   const isExternal =
-    typeof href === 'string' && (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0);
+    typeof href === 'string' &&
+    (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0);
 
   if (isExternal) {
     if (noLinkStyle) {
@@ -71,7 +86,9 @@ const Link = React.forwardRef(function Link(props, ref) {
   }
 
   if (noLinkStyle) {
-    return <NextLinkComposed className={className} ref={ref} to={href} {...other} />;
+    return (
+      <NextLinkComposed className={className} ref={ref} to={href} {...other} />
+    );
   }
 
   return (
