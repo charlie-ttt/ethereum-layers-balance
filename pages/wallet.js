@@ -10,7 +10,6 @@ import PropTypes from "prop-types";
 import SingleEthBalance from "../src/components/single-eth-balance";
 
 function Wallet({ balanceData }) {
-  console.log("balanceData", balanceData);
   const { main, arbitrum, zksync } = balanceData;
 
   return (
