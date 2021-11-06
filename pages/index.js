@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 import {
   Box,
@@ -7,15 +7,15 @@ import {
   Grid,
   TextField,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
-import Head from 'next/head';
-import LoadingButton from '@mui/lab/LoadingButton';
-import { useRouter } from 'next/router';
-import web3 from 'web3';
+import Head from "next/head";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { useRouter } from "next/router";
+import web3 from "web3";
 
 export default function Index() {
-  const [address, setAddress] = React.useState('');
+  const [address, setAddress] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorText, setErrorText] = React.useState(null);
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function Index() {
     if (isValidAddress) {
       router.push(`/wallet?address=${address}`);
     } else {
-      setErrorText('Invalid address');
+      setErrorText("Invalid address");
     }
   }
 
