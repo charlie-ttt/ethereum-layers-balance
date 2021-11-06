@@ -27,6 +27,7 @@ export default function Index() {
       router.push(`/wallet?address=${address}`);
     } else {
       setErrorText("Invalid address");
+      setIsLoading(false);
     }
   }
 
