@@ -3,7 +3,7 @@ import { Box, Card, Typography } from '@mui/material';
 import { Chart } from './chart';
 import { useTheme } from '@mui/material/styles';
 
-const EthBalance = ({ value, label }) => {
+const SingleEthBalance = ({ value, label }) => {
   const theme = useTheme();
 
   const chartOptions = {
@@ -37,7 +37,7 @@ const EthBalance = ({ value, label }) => {
     },
   };
 
-  const chartSeries = [76];
+  const chartSeries = [100];
 
   return (
     <Card>
@@ -95,4 +95,4 @@ const EthBalance = ({ value, label }) => {
   );
 };
 
-export default EthBalance;
+export default SingleEthBalance;

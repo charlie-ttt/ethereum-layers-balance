@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {
   Box,
-  Button,
   Container,
   FormControl,
   Grid,
@@ -47,7 +46,9 @@ export default function Index() {
           <Box sx={{ mb: 4 }}>
             <Grid container justifyContent="center" spacing={3}>
               <Grid item>
-                <Typography variant="h4">Your ETH Balances</Typography>
+                <Typography variant="h4">
+                  Your ETH Balances (L1 & L2)
+                </Typography>
               </Grid>
             </Grid>
             <Grid container justifyContent="center" spacing={3}>

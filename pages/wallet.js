@@ -5,7 +5,8 @@ import {
   getZksyncBalance,
 } from '../src/utils/getBalances';
 
-import EthBalance from '../src/components/eth-balance';
+import OverallEthBalance from '../src/components/overall-eth-balance';
+import SingleEthBalance from '../src/components/single-eth-balance';
 
 function Wallet({ balanceData }) {
   console.log('balanceData', balanceData);
@@ -27,17 +28,23 @@ function Wallet({ balanceData }) {
           </Grid>
         </Box>
         <Grid container spacing={4}>
-          <Grid item md={6} xs={12}>
-            <EthBalance label="Main (Layer 1)" value={balanceData.main} />
+          <Grid item xs={12}>
+            <OverallEthBalance balances={balanceData} />
           </Grid>
           <Grid item md={6} xs={12}>
-            <EthBalance
+            <SingleEthBalance label="Main (Layer 1)" value={balanceData.main} />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <SingleEthBalance
               label="Arbitrum (Layer 2)"
               value={balanceData.arbitrum}
             />
           </Grid>
           <Grid item md={6} xs={12}>
-            <EthBalance label="Zksync (Layer 2)" value={balanceData.zksync} />
+            <SingleEthBalance
+              label="Zksync (Layer 2)"
+              value={balanceData.zksync}
+            />
           </Grid>
         </Grid>
       </Container>
