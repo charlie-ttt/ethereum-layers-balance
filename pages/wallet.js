@@ -30,7 +30,7 @@ function Wallet({ balanceData }) {
           </Grid>
         </Box>
         <Grid container spacing={4}>
-          <Grid item xs={12}>
+          <Grid container xs={12} justifyContent="center">
             <OverallEthBalance balances={balanceData} />
           </Grid>
           <Grid item md={6} xs={12}>
