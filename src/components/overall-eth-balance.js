@@ -1,11 +1,13 @@
-import { Card } from '@mui/material';
-import { Chart } from './chart';
+import { Card } from "@mui/material";
+import { Chart } from "./chart";
+import PropTypes from "prop-types";
 
 const OverallEthBalance = ({ balances }) => {
   if (!balances) return <></>;
+  const { main, arbitrum, zksync } = balances;
 
-  const chartLabels = ['main', 'zksync', 'arbitrum'];
-  const chartSeries = [+balances.main, +balances.zksync, +balances.arbitrum];
+  const chartLabels = ["Mainnet", "Zksync", "Arbitrum"];
+  const chartSeries = [+main, +zksync, +arbitrum];
 
   const chartOptions = {
     labels: chartLabels,
@@ -22,11 +24,20 @@ const OverallEthBalance = ({ balances }) => {
             width: 200,
           },
           legend: {
-            position: 'bottom',
+            position: "bottom",
           },
         },
       },
     ],
+    legend: {
+      show: false,
+    },
+    dataLabels: {
+      formatter(val, opts) {
+        const name = opts.w.globals.labels[opts.seriesIndex];
+        return [name, val.toFixed(1) + "%"];
+      },
+    },
   };
 
   return (
@@ -39,6 +50,10 @@ const OverallEthBalance = ({ balances }) => {
       />
     </Card>
   );
+};
+
+OverallEthBalance.propTypes = {
+  balances: PropTypes.object,
 };
 
 export default OverallEthBalance;

@@ -1,14 +1,15 @@
-import { Box, Card, Typography } from '@mui/material';
+import { Box, Card, Typography } from "@mui/material";
 
-import { Chart } from './chart';
-import { useTheme } from '@mui/material/styles';
+import { Chart } from "./chart";
+import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
 
 const SingleEthBalance = ({ value, label }) => {
   const theme = useTheme();
 
   const chartOptions = {
     chart: {
-      background: 'transparent',
+      background: "transparent",
       stacked: false,
       toolbar: {
         show: false,
@@ -25,7 +26,7 @@ const SingleEthBalance = ({ value, label }) => {
           show: false,
         },
         hollow: {
-          size: '40%',
+          size: "40%",
         },
         track: {
           background: theme.palette.primary.dark,
@@ -44,13 +45,13 @@ const SingleEthBalance = ({ value, label }) => {
       <Box
         sx={{
           alignItems: {
-            sm: 'center',
+            sm: "center",
           },
-          display: 'flex',
-          flexWrap: 'wrap',
+          display: "flex",
+          flexWrap: "wrap",
           flexDirection: {
-            xs: 'column',
-            sm: 'row',
+            xs: "column",
+            sm: "row",
           },
         }}
       >
@@ -63,7 +64,7 @@ const SingleEthBalance = ({ value, label }) => {
         />
         <Box
           sx={{
-            display: 'flex',
+            display: "flex",
             flexGrow: 1,
             pt: {
               sm: 3,
@@ -83,16 +84,21 @@ const SingleEthBalance = ({ value, label }) => {
             }}
           >
             <Typography color="primary" variant="h4">
-              {value || '0.00'} ETH
+              {value || "0.00"} ETH
             </Typography>
             <Typography color="textSecondary" sx={{ mt: 1 }} variant="body2">
-              {label || ''}
+              {label || ""}
             </Typography>
           </Box>
         </Box>
       </Box>
     </Card>
   );
+};
+
+SingleEthBalance.propTypes = {
+  value: PropTypes.string,
+  label: PropTypes.string,
 };
 
 export default SingleEthBalance;

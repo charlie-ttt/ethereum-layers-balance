@@ -1,15 +1,17 @@
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from "@mui/material";
 import {
   getArbitrumBalance,
   getMainBalance,
   getZksyncBalance,
-} from '../src/utils/getBalances';
+} from "../src/utils/getBalances";
 
-import OverallEthBalance from '../src/components/overall-eth-balance';
-import SingleEthBalance from '../src/components/single-eth-balance';
+import OverallEthBalance from "../src/components/overall-eth-balance";
+import PropTypes from "prop-types";
+import SingleEthBalance from "../src/components/single-eth-balance";
 
 function Wallet({ balanceData }) {
-  console.log('balanceData', balanceData);
+  console.log("balanceData", balanceData);
+  const { main, arbitrum, zksync } = balanceData;
 
   return (
     <Box
@@ -32,19 +34,13 @@ function Wallet({ balanceData }) {
             <OverallEthBalance balances={balanceData} />
           </Grid>
           <Grid item md={6} xs={12}>
-            <SingleEthBalance label="Main (Layer 1)" value={balanceData.main} />
+            <SingleEthBalance label="Main (Layer 1)" value={main} />
           </Grid>
           <Grid item md={6} xs={12}>
-            <SingleEthBalance
-              label="Arbitrum (Layer 2)"
-              value={balanceData.arbitrum}
-            />
+            <SingleEthBalance label="Arbitrum (Layer 2)" value={arbitrum} />
           </Grid>
           <Grid item md={6} xs={12}>
-            <SingleEthBalance
-              label="Zksync (Layer 2)"
-              value={balanceData.zksync}
-            />
+            <SingleEthBalance label="Zksync (Layer 2)" value={zksync} />
           </Grid>
         </Grid>
       </Container>
@@ -54,9 +50,9 @@ function Wallet({ balanceData }) {
 
 export async function getServerSideProps(context) {
   const balanceData = {
-    main: '0',
-    zksync: '0',
-    arbitrum: '0',
+    main: "0",
+    zksync: "0",
+    arbitrum: "0",
   };
   const { address } = context.query;
   if (!address) {
@@ -74,5 +70,9 @@ export async function getServerSideProps(context) {
     props: { balanceData },
   };
 }
+
+Wallet.propTypes = {
+  balanceData: PropTypes.object,
+};
 
 export default Wallet;
