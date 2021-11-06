@@ -9,7 +9,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Dashboard: Overview</title>
+        <title>Dashboard: ETH Balances</title>
       </Head>
       <Box
         component="main"
