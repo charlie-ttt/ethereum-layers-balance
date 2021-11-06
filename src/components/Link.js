@@ -1,30 +1,21 @@
-import * as React from 'react';
+import * as React from "react";
 
-import MuiLink from '@mui/material/Link';
-import NextLink from 'next/link';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { styled } from '@mui/material/styles';
-import { useRouter } from 'next/router';
+import MuiLink from "@mui/material/Link";
+import NextLink from "next/link";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { styled } from "@mui/material/styles";
+import { useRouter } from "next/router";
 
 // Add support for the sx prop for consistency with the other branches.
-const Anchor = styled('a')({});
+const Anchor = styled("a")({});
 
 export const NextLinkComposed = React.forwardRef(function NextLinkComposed(
   props,
   ref
 ) {
-  const {
-    to,
-    linkAs,
-    href,
-    replace,
-    scroll,
-    shallow,
-    prefetch,
-    locale,
-    ...other
-  } = props;
+  const { to, linkAs, replace, scroll, shallow, prefetch, locale, ...other } =
+    props;
 
   return (
     <NextLink
@@ -58,24 +49,23 @@ NextLinkComposed.propTypes = {
 // https://nextjs.org/docs/#with-link
 const Link = React.forwardRef(function Link(props, ref) {
   const {
-    activeClassName = 'active',
+    activeClassName = "active",
     as: linkAs,
     className: classNameProps,
     href,
     noLinkStyle,
-    role, // Link don't have roles.
     ...other
   } = props;
 
   const router = useRouter();
-  const pathname = typeof href === 'string' ? href : href.pathname;
+  const pathname = typeof href === "string" ? href : href.pathname;
   const className = clsx(classNameProps, {
     [activeClassName]: router.pathname === pathname && activeClassName,
   });
 
   const isExternal =
-    typeof href === 'string' &&
-    (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0);
+    typeof href === "string" &&
+    (href.indexOf("http") === 0 || href.indexOf("mailto:") === 0);
 
   if (isExternal) {
     if (noLinkStyle) {

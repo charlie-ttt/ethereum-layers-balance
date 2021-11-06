@@ -23,6 +23,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "prettier": "prettier --write '**/*.js'",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
   },
   "devDependencies": {
