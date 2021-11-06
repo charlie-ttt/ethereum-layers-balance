@@ -1,11 +1,36 @@
 import * as React from 'react';
 
-import { Box, Container, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
 
-import EthBalance from '../src/components/eth-balance';
 import Head from 'next/head';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { useRouter } from 'next/router';
+import web3 from 'web3';
 
 export default function Index() {
+  const [address, setAddress] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [errorText, setErrorText] = React.useState(null);
+  const router = useRouter();
+
+  function handleSubmit() {
+    setIsLoading(true);
+    const isValidAddress = web3.utils.isAddress(address);
+    if (isValidAddress) {
+      router.push(`/wallet?address=${address}`);
+    } else {
+      setErrorText('Invalid address');
+    }
+  }
+
   return (
     <>
       <Head>
@@ -20,20 +45,36 @@ export default function Index() {
       >
         <Container maxWidth="xl">
           <Box sx={{ mb: 4 }}>
-            <Grid container justifyContent="space-between" spacing={3}>
+            <Grid container justifyContent="center" spacing={3}>
               <Grid item>
                 <Typography variant="h4">Your ETH Balances</Typography>
               </Grid>
             </Grid>
+            <Grid container justifyContent="center" spacing={3}>
+              <Grid item xs={6}>
+                <FormControl variant="standard" fullWidth>
+                  <TextField
+                    label="Wallet Address"
+                    variant="outlined"
+                    id="address"
+                    margin="normal"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    error={!!errorText}
+                    helperText={errorText}
+                    fullWidth
+                  />
+                  <LoadingButton
+                    variant="contained"
+                    onClick={handleSubmit}
+                    loading={!!isLoading}
+                  >
+                    Submit
+                  </LoadingButton>
+                </FormControl>
+              </Grid>
+            </Grid>
           </Box>
-          <Grid container spacing={4}>
-            <Grid item md={6} xs={12}>
-              <EthBalance label="Main (Layer 1)" value="200" />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <EthBalance label="Arbitrum (Layer 2)" value="2000" />
-            </Grid>
-          </Grid>
         </Container>
       </Box>
     </>
