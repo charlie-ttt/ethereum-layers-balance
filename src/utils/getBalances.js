@@ -10,7 +10,8 @@ export async function getMainBalance(address) {
       action: "balance",
       address: address,
       tag: "latest",
-      apikey: "CNK4S53H229FQ49811PKFZGGDF5AH7II7H",
+      // eslint-disable-next-line no-undef
+      apikey: process.env.ETHERSCAN_API_KEY,
     },
   });
   const weibalance = data?.result || "0";
