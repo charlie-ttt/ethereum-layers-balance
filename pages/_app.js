@@ -7,10 +7,16 @@ import Head from "next/head";
 import PropTypes from "prop-types";
 import Script from "next/script";
 import { ThemeProvider } from "@mui/material/styles";
+import Web3 from "web3";
+import { Web3ReactProvider } from "@web3-react/core";
 import createEmotionCache from "../src/createEmotionCache";
 import theme from "../src/theme";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+
+function getLibrary(provider) {
+  return new Web3(provider);
+}
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -36,20 +42,21 @@ export default function MyApp(props) {
         <title>My page</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
 
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -57,10 +64,11 @@ export default function MyApp(props) {
               page_path: window.location.pathname,
             });
           `,
-          }}
-        />
-        <Component {...pageProps} />
-      </ThemeProvider>
+            }}
+          />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </Web3ReactProvider>
     </CacheProvider>
   );
 }
