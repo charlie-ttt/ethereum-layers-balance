@@ -2,6 +2,7 @@ import * as React from "react";
 
 import {
   Box,
+  Button,
   Container,
   FormControl,
   Grid,
@@ -11,7 +12,9 @@ import {
 
 import Head from "next/head";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { injected } from "../src/lib/connector";
 import { useRouter } from "next/router";
+import { useWeb3React } from "@web3-react/core";
 import web3 from "web3";
 
 export default function Index() {
@@ -19,6 +22,32 @@ export default function Index() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorText, setErrorText] = React.useState(null);
   const router = useRouter();
+
+  const { account, activate, deactivate } = useWeb3React();
+
+  async function connect() {
+    try {
+      await activate(injected);
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  async function disconnect() {
+    try {
+      deactivate();
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  React.useEffect(() => {
+    if (account) {
+      setAddress(account);
+    } else {
+      setAddress("");
+    }
+  }, [account]);
 
   function handleSubmit() {
     setIsLoading(true);
@@ -50,6 +79,23 @@ export default function Index() {
                 <Typography variant="h4">
                   Your ETH Balances (L1 & L2)
                 </Typography>
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              justifyContent="center"
+              spacing={3}
+              sx={{ mt: 4, mb: 4 }}
+            >
+              <Grid item>
+                <Button variant="outlined" onClick={connect}>
+                  Connect to Metamask
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="outlined" onClick={disconnect}>
+                  Disconnect
+                </Button>
               </Grid>
             </Grid>
             <Grid container justifyContent="center" spacing={3}>
