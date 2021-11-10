@@ -2,6 +2,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import {
   getArbitrumBalance,
   getMainBalance,
+  getOptimisticBalance,
   getZksyncBalance,
 } from "../src/utils/getBalances";
 
@@ -10,7 +11,7 @@ import PropTypes from "prop-types";
 import SingleEthBalance from "../src/components/single-eth-balance";
 
 function Wallet({ balanceData }) {
-  const { main, arbitrum, zksync } = balanceData;
+  const { main, arbitrum, zksync, optimistic } = balanceData;
 
   return (
     <Box
@@ -41,6 +42,9 @@ function Wallet({ balanceData }) {
           <Grid item md={6} xs={12}>
             <SingleEthBalance label="Zksync (Layer 2)" value={zksync} />
           </Grid>
+          <Grid item md={6} xs={12}>
+            <SingleEthBalance label="Optimistic (Layer 2)" value={optimistic} />
+          </Grid>
         </Grid>
       </Container>
     </Box>
@@ -61,9 +65,11 @@ export async function getServerSideProps(context) {
   const mainBalance = await getMainBalance(address);
   const zksyncBalance = await getZksyncBalance(address);
   const arbitrumBalance = await getArbitrumBalance(address);
+  const optimisticBalance = await getOptimisticBalance(address);
   balanceData.main = mainBalance;
   balanceData.arbitrum = arbitrumBalance;
   balanceData.zksync = zksyncBalance;
+  balanceData.optimistic = optimisticBalance;
 
   return {
     props: { balanceData },
