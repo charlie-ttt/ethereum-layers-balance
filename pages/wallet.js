@@ -62,10 +62,14 @@ export async function getServerSideProps(context) {
     return { props: { balanceData } };
   }
 
-  const mainBalance = await getMainBalance(address);
-  const zksyncBalance = await getZksyncBalance(address);
-  const arbitrumBalance = await getArbitrumBalance(address);
-  const optimisticBalance = await getOptimisticBalance(address);
+  const [mainBalance, zksyncBalance, arbitrumBalance, optimisticBalance] =
+    await Promise.all([
+      getMainBalance(address),
+      getZksyncBalance(address),
+      getArbitrumBalance(address),
+      getOptimisticBalance(address),
+    ]);
+
   balanceData.main = mainBalance;
   balanceData.arbitrum = arbitrumBalance;
   balanceData.zksync = zksyncBalance;
