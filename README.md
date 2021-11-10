@@ -11,3 +11,4 @@
 - Currently support protocol
   - Arbitrum
   - Zksync
+  - Optimistic
