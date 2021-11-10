@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 const OverallEthBalance = ({ balances }) => {
   if (!balances) return <></>;
-  const { main, arbitrum, zksync } = balances;
+  const { main, arbitrum, zksync, optimistic } = balances;
 
-  const chartLabels = ["Mainnet", "Zksync", "Arbitrum"];
-  const chartSeries = [+main, +zksync, +arbitrum];
+  const chartLabels = ["Mainnet", "Zksync", "Arbitrum", "Optimistic"];
+  const chartSeries = [+main, +zksync, +arbitrum, +optimistic];
 
   const chartOptions = {
     labels: chartLabels,

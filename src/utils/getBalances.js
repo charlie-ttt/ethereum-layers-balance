@@ -43,6 +43,25 @@ export async function getZksyncBalance(address) {
   return formatbalance(weibalance);
 }
 
+export async function getOptimisticBalance(address) {
+  const balance = await Axios({
+    method: "get",
+    url: `https://api-optimistic.etherscan.io/api`,
+    params: {
+      module: "account",
+      action: "balance",
+      address: address,
+      tag: "latest",
+      // eslint-disable-next-line no-undef
+      apikey: process.env.OPTIMISTIC_API_KEY,
+    },
+  });
+  const weibalance = balance?.data?.result || "0";
+
+  return formatbalance(weibalance);
+}
+
+// utils function
 function formatbalance(weibalance) {
   const etherbalance = web3.utils.fromWei(weibalance, "ether");
   const formattedbalance = etherbalance.substring(
