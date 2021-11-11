@@ -1,7 +1,9 @@
 # Ethereum Layer 1 & Layer 2 balance dashboard
 
-- This app is meant to display all ethereum balances for L1 and L2 in one place. Since there is no such tool available on the internet.
-- The app is deployed at https://ethereum-layers-balance.vercel.app/
+- The app is live at https://ethereum-layers-balance.vercel.app/
+- This app is meant to display all ethereum balances of the main Layer 2 Scaling Solutions.
+   1. Zero-Knowledge Rollups (zkSync)
+   2. Optimistic Rollups (Optimism, Arbitrum)
 
 ## Layer 1
 - Currently support protocol
