@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 const OverallEthBalance = ({ balances }) => {
   if (!balances) return <></>;
-  const { main, arbitrum, zksync, optimistic } = balances;
+  const { main, arbitrum, zksync, optimistic, polygon } = balances;
 
   const chartLabels = ["Mainnet", "Zksync", "Arbitrum", "Optimistic"];
-  const chartSeries = [+main, +zksync, +arbitrum, +optimistic];
+  const chartSeries = [+main, +zksync, +arbitrum, +optimistic, +polygon];
 
   const chartOptions = {
     labels: chartLabels,
@@ -41,14 +41,17 @@ const OverallEthBalance = ({ balances }) => {
   };
 
   return (
-    <Card>
-      <Chart
-        options={chartOptions}
-        series={chartSeries}
-        type="pie"
-        width={380}
-      />
-    </Card>
+    <>
+      {/* <Card>Combined ETH Balance</Card> */}
+      <Card>
+        <Chart
+          options={chartOptions}
+          series={chartSeries}
+          type="pie"
+          width={380}
+        />
+      </Card>
+    </>
   );
 };
 
