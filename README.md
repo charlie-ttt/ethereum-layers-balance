@@ -14,3 +14,6 @@
   - Arbitrum
   - Zksync
   - Optimistic
+  - Polygon
+  - Loopring (coming soon)
+  - StarkNet (coming soon)
