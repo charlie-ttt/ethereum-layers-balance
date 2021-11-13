@@ -17,3 +17,7 @@
   - Polygon
   - Loopring (coming soon)
   - StarkNet (coming soon)
+
+
+## Demo of App
+![App Demo Image](/DemoImage.png?raw=true "App Demo Image")
