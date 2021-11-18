@@ -1,15 +1,25 @@
+import type { ApexOptions } from "apexcharts";
 import { Card } from "@mui/material";
 import { Chart } from "./chart";
-import PropTypes from "prop-types";
 
-const OverallEthBalance = ({ balances }) => {
+type OverallEthBalance = {
+  balances: {
+    main: number;
+    arbitrum: number;
+    zksync: number;
+    optimistic: number;
+    polygon: number;
+  };
+};
+
+const OverallEthBalance = ({ balances }: OverallEthBalance) => {
   if (!balances) return <></>;
   const { main, arbitrum, zksync, optimistic, polygon } = balances;
 
   const chartLabels = ["Mainnet", "Zksync", "Arbitrum", "Optimistic"];
-  const chartSeries = [+main, +zksync, +arbitrum, +optimistic, +polygon];
+  const chartSeries = [main, zksync, arbitrum, optimistic, polygon];
 
-  const chartOptions = {
+  const chartOptions: ApexOptions = {
     labels: chartLabels,
     theme: {
       monochrome: {
@@ -33,8 +43,10 @@ const OverallEthBalance = ({ balances }) => {
       show: false,
     },
     dataLabels: {
+      // @ts-ignore
       formatter(val, opts) {
         const name = opts.w.globals.labels[opts.seriesIndex];
+        // @ts-ignore
         return [name, val.toFixed(1) + "%"];
       },
     },
@@ -42,7 +54,6 @@ const OverallEthBalance = ({ balances }) => {
 
   return (
     <>
-      {/* <Card>Combined ETH Balance</Card> */}
       <Card>
         <Chart
           options={chartOptions}
@@ -53,10 +64,6 @@ const OverallEthBalance = ({ balances }) => {
       </Card>
     </>
   );
-};
-
-OverallEthBalance.propTypes = {
-  balances: PropTypes.object,
 };
 
 export default OverallEthBalance;

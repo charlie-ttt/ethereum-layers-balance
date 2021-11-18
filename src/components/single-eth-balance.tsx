@@ -1,10 +1,14 @@
 import { Box, Card, Typography } from "@mui/material";
 
 import { Chart } from "./chart";
-import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 
-const SingleEthBalance = ({ value, label }) => {
+type SingleEthBalanceProps = {
+  value: number;
+  label: string;
+};
+
+const SingleEthBalance = ({ value, label }: SingleEthBalanceProps) => {
   const theme = useTheme();
 
   const chartOptions = {
@@ -84,7 +88,7 @@ const SingleEthBalance = ({ value, label }) => {
             }}
           >
             <Typography color="primary" variant="h4">
-              {value || "0.00"} ETH
+              {value || 0} ETH
             </Typography>
             <Typography color="textSecondary" sx={{ mt: 1 }} variant="body2">
               {label || ""}
@@ -94,11 +98,6 @@ const SingleEthBalance = ({ value, label }) => {
       </Box>
     </Card>
   );
-};
-
-SingleEthBalance.propTypes = {
-  value: PropTypes.string,
-  label: PropTypes.string,
 };
 
 export default SingleEthBalance;
