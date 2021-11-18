@@ -13,10 +13,15 @@ type OverallEthBalance = {
 };
 
 const OverallEthBalance = ({ balances }: OverallEthBalance) => {
-  if (!balances) return <></>;
   const { main, arbitrum, zksync, optimistic, polygon } = balances;
 
-  const chartLabels = ["Mainnet", "Zksync", "Arbitrum", "Optimistic"];
+  const chartLabels = [
+    "Mainnet",
+    "Zksync",
+    "Arbitrum",
+    "Optimistic",
+    "Polygon",
+  ];
   const chartSeries = [main, zksync, arbitrum, optimistic, polygon];
 
   const chartOptions: ApexOptions = {
@@ -59,7 +64,7 @@ const OverallEthBalance = ({ balances }: OverallEthBalance) => {
           options={chartOptions}
           series={chartSeries}
           type="pie"
-          width={380}
+          width={380 + Math.floor(Math.random() * 2) + 1} // alternative solution to fix bug graph disappear when resizing
         />
       </Card>
     </>
