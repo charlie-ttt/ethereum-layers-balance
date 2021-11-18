@@ -12,7 +12,7 @@ export default async function handler(
   const address = req.query.address;
   if (!address) return res.status(400);
 
-  const balance = await Axios({
+  const { data } = await Axios({
     method: "get",
     url: "https://api.polygonscan.com/api",
     params: {
@@ -25,6 +25,10 @@ export default async function handler(
       apikey: process.env.POLYGON_API_KEY,
     },
   });
-  const weibalance = balance?.data?.result || "0";
+  // status 0 refers to error/incorrect address input
+  if (data.status === "0") {
+    return res.status(200).json({ value: 0 });
+  }
+  const weibalance = data?.result || "0";
   return res.status(200).json({ value: formatbalance(weibalance) });
 }
