@@ -19,6 +19,7 @@
     "react": "latest",
     "react-apexcharts": "^1.3.9",
     "react-dom": "latest",
+    "swr": "^1.0.1",
     "web3": "^1.6.0"
   },
   "scripts": {
