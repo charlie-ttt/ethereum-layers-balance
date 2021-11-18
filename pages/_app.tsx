@@ -7,7 +7,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import type { EmotionCache } from "@emotion/cache";
 import Head from "next/head";
 import type { NextPage } from "next";
-import PropTypes from "prop-types";
 import Script from "next/script";
 import { ThemeProvider } from "@mui/material/styles";
 import Web3 from "web3";
