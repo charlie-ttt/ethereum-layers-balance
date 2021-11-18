@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Box,
   Button,
@@ -9,6 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Head from "next/head";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -18,9 +17,9 @@ import { useWeb3React } from "@web3-react/core";
 import web3 from "web3";
 
 export default function Index() {
-  const [address, setAddress] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [errorText, setErrorText] = React.useState(null);
+  const [address, setAddress] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string | null>(null);
   const router = useRouter();
 
   const { account, activate, deactivate } = useWeb3React();
@@ -41,7 +40,7 @@ export default function Index() {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (account) {
       setAddress(account);
     } else {

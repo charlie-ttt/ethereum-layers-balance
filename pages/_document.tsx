@@ -2,7 +2,7 @@ import * as React from "react";
 
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
-import createEmotionCache from "../src/createEmotionCache";
+import createEmotionCache from "../src/utils/createEmotionCache";
 import createEmotionServer from "@emotion/server/create-instance";
 import theme from "../src/theme";
 
@@ -62,7 +62,14 @@ MyDocument.getInitialProps = async (ctx) => {
   ctx.renderPage = () =>
     originalRenderPage({
       // eslint-disable-next-line react/display-name
-      enhanceApp: (App) => (props) => <App emotionCache={cache} {...props} />,
+      enhanceApp: (App) => (props) =>
+        (
+          <App
+            // @ts-ignore
+            emotionCache={cache}
+            {...props}
+          />
+        ),
     });
 
   const initialProps = await Document.getInitialProps(ctx);

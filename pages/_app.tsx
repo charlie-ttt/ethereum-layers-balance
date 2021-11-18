@@ -1,33 +1,41 @@
 import * as React from "react";
 import * as gtag from "../src/lib/gtag";
 
+import type { AppProps } from "next/app";
 import { CacheProvider } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
+import type { EmotionCache } from "@emotion/cache";
 import Head from "next/head";
+import type { NextPage } from "next";
 import PropTypes from "prop-types";
 import Script from "next/script";
 import { ThemeProvider } from "@mui/material/styles";
 import Web3 from "web3";
 import { Web3ReactProvider } from "@web3-react/core";
-import createEmotionCache from "../src/createEmotionCache";
+import createEmotionCache from "../src/utils/createEmotionCache";
 import theme from "../src/theme";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-function getLibrary(provider) {
+type EnhancedAppProps = AppProps & {
+  Component: NextPage;
+  emotionCache: EmotionCache;
+};
+
+function getLibrary(provider: any) {
   return new Web3(provider);
 }
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-export default function MyApp(props) {
+export default function MyApp(props: EnhancedAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   //gtag manager stuff [https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_app.js]
   const router = useRouter();
   useEffect(() => {
-    const handleRouteChange = (url) => {
+    const handleRouteChange = (url: string) => {
       gtag.pageview(url);
     };
     router.events.on("routeChangeComplete", handleRouteChange);
@@ -72,9 +80,3 @@ export default function MyApp(props) {
     </CacheProvider>
   );
 }
-
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  emotionCache: PropTypes.object,
-  pageProps: PropTypes.object.isRequired,
-};
