@@ -69,7 +69,7 @@ const text = {
   disabled: "rgba(255, 255, 255, 0.48)",
 };
 
-export const darkThemeOptions = {
+export const darkThemeOptions: ThemeOptions = {
   components: {
     MuiAvatar: {
       styleOverrides: {
@@ -174,7 +174,6 @@ export const darkThemeOptions = {
     error,
     info,
     mode: "dark",
-    neutral,
     primary,
     secondary,
     success,
