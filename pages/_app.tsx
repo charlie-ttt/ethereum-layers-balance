@@ -34,7 +34,7 @@ export default function MyApp(props: EnhancedAppProps) {
   //gtag manager stuff [https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_app.js]
   const router = useRouter();
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
+    const handleRouteChange = (url: URL) => {
       gtag.pageview(url);
     };
     router.events.on("routeChangeComplete", handleRouteChange);
